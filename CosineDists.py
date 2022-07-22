@@ -9,7 +9,7 @@ def cosine_distances(X, Y):
     if(len(Y.shape) > 1):
         Y = np.average(Y, axis=0)
     
-    print(X.shape)
-    print(Y.shape)
+    # print(X.shape)
+    # print(Y.shape)
     
     return np.dot(X, Y) / (np.linalg.norm(X) * np.linalg.norm(Y))

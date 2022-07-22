@@ -10,7 +10,7 @@ def descriptors_from_file(filepath: str):
     #boxes, probabilities, landmarks
     bpl, image = boxes_and_image(model, filepath)
     boxes, probabilities, landmarks = bpl
-    return model.compute_descriptors(image, boxes)
+    return model.compute_descriptors(image, boxes)[0]
 
 def descriptors_from_filestack(filepaths: list):
     descriptor_stack = []
