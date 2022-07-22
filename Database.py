@@ -2,6 +2,7 @@ import pickle
 import numpy as np
 from CosineDists import cosine_distances
 from Profile import Profile
+from Descriptors import descriptors_from_file
 
 class Database:
     def __init__(self) -> None:
@@ -28,4 +29,20 @@ class Database:
             dist = cosine_distances(face_descriptor, self.database[name].face_descriptor)
             deltas[dist] = name
         print(deltas)
-        return deltas[max(deltas.keys())]
+        maximum = max(deltas.keys())
+        if(maximum > 0.7):
+            return deltas[maximum]
+        else:
+            return "Unknown"
+        
+    def load_from_dict(self, names_and_numbers: dict):
+        names_and_descriptors = {}
+        for name in names_and_numbers.keys():
+            names_and_descriptors[name] = []
+            for i in range(1, names_and_numbers[name] + 1):
+                names_and_descriptors[name].append(descriptors_from_file(f"images/{name}_{i}.jpg"))
+        for name in names_and_descriptors.keys():
+            names_and_descriptors[name] = np.array(names_and_descriptors[name])
+            self.add_entry(name, names_and_descriptors[name])
+    def get_descriptor(self, name: str):
+        return self.database[name].face_descriptor

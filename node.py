@@ -2,13 +2,14 @@ import networkx as nx
 import numpy as np
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
+from Descriptors import descriptors_from_file
 
 
 class Node:
     """ Describes a node in a graph, and the edges connected
         to that node."""
 
-    def __init__(self, ID, neighbors, descriptor, truth=None, file_path=None):
+    def __init__(self, ID, neighbors, truth=None, file_path=None):
         """
         Parameters
         ----------
@@ -42,10 +43,11 @@ class Node:
         # (n1_ID, n2_ID, ...)
         # The IDs of this nodes neighbors. Empty if no neighbors
         self.neighbors = tuple(neighbors)
-        self.descriptor = descriptor
 
         self.truth = truth
         self.file_path = file_path
+        
+        self.descriptor = descriptors_from_file(self.file_path)
 
 
 def plot_graph(graph, adj):
