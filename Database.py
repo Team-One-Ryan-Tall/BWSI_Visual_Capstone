@@ -29,9 +29,9 @@ class Database:
             dist = cosine_distances(face_descriptor, self.database[name].face_descriptor)
             deltas[dist] = name
         print(deltas)
-        maximum = max(deltas.keys())
-        if(maximum > 0.7):
-            return deltas[maximum]
+        minimum = min(deltas.keys())
+        if(minimum <= 0.3):
+            return deltas[minimum]
         else:
             return "Unknown"
         
