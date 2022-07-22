@@ -29,3 +29,7 @@ def display_boxes_arr(model: FacenetModel, img: np.ndarray):
 
     for box, prob, landmark in zip(boxes, probabilities, landmarks):
         ax.add_patch(Rectangle(box[:2], *(box[2:] - box[:2]), fill=None, lw=2, color="red"))
+        
+def boxes_and_image(model: FacenetModel, filepath: str):
+    img = load_image(filepath)
+    return model.detect(img), img

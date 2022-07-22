@@ -22,3 +22,10 @@ class Database:
         with open(FileName,"rb") as unopened_file:
             Database = pickle.load(unopened_file)
         return Database
+    def identify_face(self, face_descriptor: np.ndarray):
+        deltas = {}
+        for name in self.database:
+            dist = cosine_distances(face_descriptor, self.database[name].face_descriptor)
+            deltas[dist] = name
+        print(deltas)
+        return deltas[max(deltas.keys())]
