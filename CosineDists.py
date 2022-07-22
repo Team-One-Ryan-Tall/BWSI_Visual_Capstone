@@ -12,4 +12,4 @@ def cosine_distances(X, Y):
     # print(X.shape)
     # print(Y.shape)
     
-    return np.dot(X, Y) / (np.linalg.norm(X) * np.linalg.norm(Y))
+    return 1 - (np.dot(X, Y) / (np.linalg.norm(X) * np.linalg.norm(Y)))
