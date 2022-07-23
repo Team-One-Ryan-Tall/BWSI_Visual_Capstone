@@ -9,7 +9,7 @@ class Node:
     """ Describes a node in a graph, and the edges connected
         to that node."""
 
-    def __init__(self, ID, neighbors, truth=None, file_path=None):
+    def __init__(self, ID, neighbors, descriptor=None, truth=None, file_path=None):
         """
         Parameters
         ----------
@@ -46,8 +46,10 @@ class Node:
 
         self.truth = truth
         self.file_path = file_path
-        
-        self.descriptor = descriptors_from_file(self.file_path)
+        if(descriptor is None):
+            self.descriptor = descriptors_from_file(self.file_path)
+        else:
+            self.descriptor = descriptor
     def plot_graph(graph, adj):
         """ Use the package networkx to produce a diagrammatic plot of the graph, with
         the nodes in the graph colored according to their current labels.
